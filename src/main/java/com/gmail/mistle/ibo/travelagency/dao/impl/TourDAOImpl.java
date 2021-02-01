@@ -26,6 +26,7 @@ public class TourDAOImpl implements TourDAO {
     @Override
     public List<Tour> findAllByCountry(String country) {
         Session session = sessionFactory.getCurrentSession();
+
         return session
                 .createQuery("select t from Tour t where t.country = :country", Tour.class)
                 .setParameter("country", country)

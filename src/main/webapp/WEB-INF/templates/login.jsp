@@ -2,7 +2,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-    <jsp:include page="sections/head.jsp">
+    <jsp:include page="head.jsp">
         <jsp:param name="titleName" value="Login"/>
     </jsp:include>
 <body>
