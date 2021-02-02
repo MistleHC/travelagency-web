@@ -20,7 +20,7 @@
             </sec:authorize>
             <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
-                    <a class="nav-link" href="<c:url value="/login"/>">Logout</a>
+                    <a class="nav-link" href="<c:url value="/login"/>">Login</a>
                 </li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
