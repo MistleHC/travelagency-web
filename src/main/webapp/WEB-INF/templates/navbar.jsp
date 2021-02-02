@@ -10,9 +10,6 @@
             <li class="nav-item active">
                 <a class="nav-link" href="<c:url value="/"/>">Home</a>
             </li>
-<%--            <li class="nav-item">--%>
-<%--                <a class="nav-link" href="<c:url value="/management"/>">Management</a>--%>
-<%--            </li>--%>
             <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/register"/>">Register</a>
@@ -21,6 +18,11 @@
             <sec:authorize access="!isAuthenticated()">
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/login"/>">Login</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="hasRole('MANAGER')">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/management"/>">Management</a>
                 </li>
             </sec:authorize>
             <sec:authorize access="isAuthenticated()">
