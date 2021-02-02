@@ -26,7 +26,12 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<Tour> getAllByCountry(String country) {
-        List<Tour> toursByCountry = tourDAO.findAllByCountry(country);
+        List<Tour> toursByCountry;
+        if (country.equals("all")) {
+            toursByCountry = getAll();
+        } else {
+            toursByCountry = tourDAO.findAllByCountry(country);
+        }
         log.info(country + " tours were received from DB");
         return toursByCountry;
     }

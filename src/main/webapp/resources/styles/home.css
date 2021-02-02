@@ -12,7 +12,7 @@ body{
     border: 1px solid #e7eaec;
 }
 .row2 {
-    margin-left: 2px;
+    margin-left: 0;
 }
 .search-btn {
     margin-right: 10px;
@@ -29,6 +29,16 @@ body{
 .img-i {
     max-height:100%;
     max-width:100%;
+}
+.lbl-set label {
+    font-size: 100px;
+}
+.h-in {
+    display: inline-block;
+    font-size: 15px;
+}
+.sel-tx {
+    font-size:14px;
 }
 .product-box:hover,
 .product-box.active {
@@ -169,4 +179,7 @@ table.shoping-cart-table tr td:last-child {
     font-size: 90%;
     background: #ffffff;
     padding: 10px 15px;
+}
+.logout {
+    float: right;
 }

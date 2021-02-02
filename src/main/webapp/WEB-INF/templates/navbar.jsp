@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="#">Travel Agency</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,9 +13,21 @@
 <%--            <li class="nav-item">--%>
 <%--                <a class="nav-link" href="<c:url value="/management"/>">Management</a>--%>
 <%--            </li>--%>
-            <li class="nav-item">
-                <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
-            </li>
+            <sec:authorize access="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/register"/>">Register</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="!isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/login"/>">Logout</a>
+                </li>
+            </sec:authorize>
+            <sec:authorize access="isAuthenticated()">
+                <li class="nav-item">
+                    <a class="nav-link" href="<c:url value="/logout"/>">Logout</a>
+                </li>
+            </sec:authorize>
         </ul>
     </div>
 </nav>

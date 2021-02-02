@@ -19,11 +19,13 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                         <i class="fas fa-search h4 text-body"></i>
                     </div>
                     <div class="col">
+                        <h3 class="h-in">Country:</h3>
                         <label>
-                            <select class="form-select" name="country">
+                            <select class="form-select form-select-lg sel-tx" name="country">
                                 <c:forEach items="${countries}" var="country">
                                     <option value="${country.name}">${country.name}</option>
                                 </c:forEach>
+                                <option value="all">All</option>
                             </select>
                         </label>
                     </div>
