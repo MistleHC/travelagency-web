@@ -4,6 +4,7 @@ import com.gmail.mistle.ibo.travelagency.model.Tour;
 import com.gmail.mistle.ibo.travelagency.service.CountryService;
 import com.gmail.mistle.ibo.travelagency.service.HotelService;
 import com.gmail.mistle.ibo.travelagency.service.TourService;
+import com.gmail.mistle.ibo.travelagency.web.dto.TourFilterDto;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,16 +29,19 @@ public class HomeController {
                                      @RequestParam(value = "higherprice", required = false) String higherPrice,
                                      @RequestParam(value = "lowergroup", required = false) String lowerGroup) {
         ModelAndView modelAndView = new ModelAndView("home_page");
-        modelAndView.addObject("tours", findToursByFilter(country, hotel, lowerPrice, higherPrice, lowerGroup));
+
+        TourFilterDto filter = TourFilterDto.builder()
+                .country(country)
+                .hotel(hotel)
+                .lowerPrice(lowerPrice)
+                .higherPrice(higherPrice)
+                .lowerGroup(lowerGroup)
+                .build();
+        filter.changeDefaultValues();
+
+        modelAndView.addObject("tours", tourService.getAllByFilter(filter));
         modelAndView.addObject("countries", countryService.getAll());
         modelAndView.addObject("hotels", hotelService.getAll());
         return modelAndView;
-    }
-
-    private List<Tour> findToursByFilter(String country, String hotel, String lowerPrice, String higherPrice, String lowerGroup) {
-        if (country == null && hotel == null) {
-            return tourService.getAll();
-        }
-        return tourService.getAllByFilter(country, hotel, lowerPrice, higherPrice, lowerGroup);
     }
 }

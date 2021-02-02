@@ -1,10 +1,11 @@
 package com.gmail.mistle.ibo.travelagency.service;
 
 import com.gmail.mistle.ibo.travelagency.model.Tour;
+import com.gmail.mistle.ibo.travelagency.web.dto.TourFilterDto;
 
 import java.util.List;
 
 public interface TourService {
     List<Tour> getAll();
-    List<Tour> getAllByFilter(String country, String hotel, String lowerPrice, String higherPrice, String lowerGroup);
+    List<Tour> getAllByFilter(TourFilterDto filter);
 }

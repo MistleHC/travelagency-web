@@ -34,6 +34,9 @@ public class Tour {
     @Column(name = "price")
     private Long price;
 
+    @Column(name = "is_hot")
+    private boolean isHot;
+
     @ManyToOne
     @JoinColumn(name = "hotel_type_id", nullable=false)
     private HotelType hotelType;
