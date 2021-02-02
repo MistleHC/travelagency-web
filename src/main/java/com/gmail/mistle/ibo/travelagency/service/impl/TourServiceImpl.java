@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -25,14 +26,31 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public List<Tour> getAllByCountry(String country) {
-        List<Tour> toursByCountry;
-        if (country.equals("all")) {
-            toursByCountry = getAll();
+    public List<Tour> getAllByFilter(String country, String hotel, String lowerPrice, String higherPrice, String lowerGroup) {
+        List<Tour> tours;
+
+        if (hotel.equals("all") && (!country.equals("") && !country.equals("all"))){
+            tours = tourDAO.findAllByCountry(country);
+        } else if (country.equals("all") && (!hotel.equals("") && !hotel.equals("all"))) {
+            tours = tourDAO.findAllByHotel(hotel);
+        } else if (!country.equals("") && !country.equals("all") && !hotel.equals("")) {
+            tours = tourDAO.findAllByCountryAndHotel(country, hotel);
         } else {
-            toursByCountry = tourDAO.findAllByCountry(country);
+            tours = getAll();
         }
-        log.info(country + " tours were received from DB");
-        return toursByCountry;
+        log.info("Tours were received from DB");
+
+        if (!lowerPrice.equals("")) {
+            tours = tours.stream().filter(t -> t.getPrice() > Integer.parseInt(lowerPrice)).collect(Collectors.toList());
+        }
+        if (!higherPrice.equals("")) {
+            tours = tours.stream().filter(t -> t.getPrice() < Integer.parseInt(higherPrice)).collect(Collectors.toList());
+        }
+        if (!lowerGroup.equals("")) {
+            tours = tours.stream().filter(t -> t.getPeoples() < Integer.parseInt(lowerGroup)).collect(Collectors.toList());
+        }
+        log.info("Tours were filtered");
+
+        return tours;
     }
 }

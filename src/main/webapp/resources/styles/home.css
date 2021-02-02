@@ -183,3 +183,23 @@ table.shoping-cart-table tr td:last-child {
 .logout {
     float: right;
 }
+.cl-btn {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+}
+.prod-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #676a6c;
+    display: block;
+    margin: 2px 0 5px 0;
+}
+
+.pro-name {
+    font-size: 18px;
+    font-weight: 600;
+    color: #676a6c;
+    display: block;
+    margin: 2px 0 5px 0;
+}

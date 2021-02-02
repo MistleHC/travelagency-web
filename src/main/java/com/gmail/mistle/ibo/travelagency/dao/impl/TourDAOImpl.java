@@ -34,6 +34,27 @@ public class TourDAOImpl implements TourDAO {
     }
 
     @Override
+    public List<Tour> findAllByHotel(String hotel) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session
+                .createQuery("select t from Tour t where t.hotelType.name = :hotel", Tour.class)
+                .setParameter("hotel", hotel)
+                .list();
+    }
+
+    @Override
+    public List<Tour> findAllByCountryAndHotel(String country, String hotel) {
+        Session session = sessionFactory.getCurrentSession();
+
+        return session
+                .createQuery("select t from Tour t where t.country = :country and t.hotelType.name = :hotel", Tour.class)
+                .setParameter("country", country)
+                .setParameter("hotel", hotel)
+                .list();
+    }
+
+    @Override
     public List<Tour> findAllByName(String name) {
         return null;
     }

@@ -8,6 +8,8 @@ import java.util.Optional;
 public interface TourDAO {
     List<Tour> findAll();
     List<Tour> findAllByCountry(String country);
+    List<Tour> findAllByHotel(String hotel);
+    List<Tour> findAllByCountryAndHotel(String country, String hotel);
     List<Tour> findAllByName(String name);
     Optional<Tour> findById(Long id);
     void save(Tour hotel);

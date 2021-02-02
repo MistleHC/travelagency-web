@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface TourService {
     List<Tour> getAll();
-    List<Tour> getAllByCountry(String country);
+    List<Tour> getAllByFilter(String country, String hotel, String lowerPrice, String higherPrice, String lowerGroup);
 }

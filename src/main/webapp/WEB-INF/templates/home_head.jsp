@@ -35,5 +35,8 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
         }
     </script>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
     <title>${param.titleName}</title>
 </head>
