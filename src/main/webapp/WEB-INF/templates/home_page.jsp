@@ -100,7 +100,12 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                                     </div>
                                 </div> <!-- Modal footer -->
                                 <sec:authorize access="isAuthenticated()">
-                                <div class="modal-footer"> <form action="https://google.com"><button class="btn btn-lg btn-success search-btn" type="submit">Buy</button></form> </div>
+                                <div class="modal-footer">
+                                    <form action="/order" method="get">
+                                        <input type="hidden" name="tourid" value="${tour.id}" />
+                                        <button class="btn btn-lg btn-success search-btn" type="submit">Buy</button>
+                                    </form>
+                                </div>
                                 </sec:authorize>
                             </div>
                         </div>

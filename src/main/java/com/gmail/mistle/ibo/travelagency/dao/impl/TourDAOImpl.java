@@ -61,7 +61,11 @@ public class TourDAOImpl implements TourDAO {
 
     @Override
     public Optional<Tour> findById(Long id) {
-        return Optional.empty();
+        Session session = sessionFactory.getCurrentSession();
+        return session
+                .createQuery("select t from Tour t where t.id = :id ", Tour.class)
+                .setParameter("id", id)
+                .uniqueResultOptional();
     }
 
     @Override

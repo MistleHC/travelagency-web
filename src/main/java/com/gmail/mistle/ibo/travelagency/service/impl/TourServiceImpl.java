@@ -1,6 +1,7 @@
 package com.gmail.mistle.ibo.travelagency.service.impl;
 
 import com.gmail.mistle.ibo.travelagency.dao.TourDAO;
+import com.gmail.mistle.ibo.travelagency.exceptions.NotFoundException;
 import com.gmail.mistle.ibo.travelagency.model.Tour;
 import com.gmail.mistle.ibo.travelagency.service.TourService;
 import com.gmail.mistle.ibo.travelagency.web.dto.TourFilterDto;
@@ -29,9 +30,15 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
+    public Tour getById(long tourId) {
+        return tourDAO
+                .findById(tourId)
+                .orElseThrow(NotFoundException::new);
+    }
+
+    @Override
     public List<Tour> getAllByFilter(TourFilterDto filter) {
         List<Tour> tours;
-        log.info(filter.toString());
 
         if (filter.getHotel().equals("all") && (!filter.getCountry().equals("") && !filter.getCountry().equals("all"))){
             tours = tourDAO.findAllByCountry(filter.getCountry());
@@ -56,7 +63,6 @@ public class TourServiceImpl implements TourService {
         tours.sort((a, b) -> Boolean.compare(a.isHot(), b.isHot()));
         Collections.reverse(tours);
         log.info("Tours were filtered");
-        log.info(tours.toString());
         return tours;
     }
 }
