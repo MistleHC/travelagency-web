@@ -2,6 +2,7 @@ package com.gmail.mistle.ibo.travelagency.service.impl;
 
 import com.gmail.mistle.ibo.travelagency.config.security.CustomUserDetails;
 import com.gmail.mistle.ibo.travelagency.dao.OrderDAO;
+import com.gmail.mistle.ibo.travelagency.exceptions.NotFoundException;
 import com.gmail.mistle.ibo.travelagency.model.Order;
 import com.gmail.mistle.ibo.travelagency.service.OrderService;
 import com.gmail.mistle.ibo.travelagency.service.StatusService;
@@ -40,9 +41,40 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public void deleteOrder(long orderId) {
+        orderDAO.deleteById(orderId);
+        log.info("Order with id {} was deleted", orderId);
+    }
+
+    @Override
+    @Transactional
+    public void setPaid(long orderId) {
+       Order order = orderDAO.findById(orderId).orElseThrow(NotFoundException::new);
+       order.setStatus(statusService.findById((long) 2));
+       orderDAO.save(order);
+        log.info("Order with id {} was updated", orderId);
+    }
+
+    @Override
+    @Transactional
+    public void setDecline(long orderId) {
+        Order order = orderDAO.findById(orderId).orElseThrow(NotFoundException::new);
+        order.setStatus(statusService.findById((long) 3));
+        orderDAO.save(order);
+        log.info("Order with id {} was updated", orderId);
+    }
+
+    @Override
     public List<Order> getAllByUserId(Long userId) {
         List<Order> usersOrders = orderDAO.findAllByUserId(userId);
         log.info("List of orders was received from DB for user {}", userId);
+        return usersOrders;
+    }
+
+    @Override
+    public List<Order> getNewOrders() {
+        List<Order> usersOrders = orderDAO.findNewOrders();
+        log.info("List of new orders was received from DB");
         return usersOrders;
     }
 

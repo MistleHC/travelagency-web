@@ -6,12 +6,10 @@ import com.gmail.mistle.ibo.travelagency.service.HotelService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-@Transactional
 @Slf4j
 @AllArgsConstructor
 public class HotelServiceImpl implements HotelService {

@@ -51,6 +51,6 @@ public class AuthorizationController {
         String email = user.getEmail(), password = user.getPassword();
         authService.registerUser(user);
         securityService.autoLogin(email, password);
-        return "redirect:/tours";
+        return "redirect:/";
     }
 }

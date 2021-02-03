@@ -16,13 +16,15 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <div class="bg-light">
         <h1 class="text-center hd-t">Profile</h1><br>
         <div class="rowa">
-            <h4 class="text-left">Name: ${customer.name}</h4>
+            <h4 class="text-left">Login: ${customer.name}</h4>
+            <h4 class="text-left">Full name: ${customer.fullName}</h4>
             <h4 class="text-left">Email: ${customer.email}</h4>
+            <h4 class="text-left">Description: ${customer.aboutMe}</h4>
         </div>
     </div>
 
     <div class="bg-light">
-        <h1 class="text-center">Orders of ${customer.name}</h1><br>
+        <h1 class="text-center">Orders</h1><br>
         <c:choose>
             <c:when test="${empty orders}">
                 <h4>User has no orders</h4>
@@ -35,10 +37,13 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                         <th scope="col">Tour type</th>
                         <th scope="col">Hotel type</th>
                         <th scope="col">Status</th>
+                        <th scope="col">Actions</th>
                     </tr>
                     <c:forEach items="${orders}" var="order">
                         <tr>
-                            <td>${order.id}</td>
+                            <td>
+                                    ${order.id}
+                            </td>
                             <td>
                                     ${order.tour.name}
                             </td>
@@ -50,6 +55,14 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                             </td>
                             <td>
                                     ${order.status.title}
+                            </td>
+                            <td>
+                                <c:if test = "${order.status.id == 1}">
+                                    <form action="/order/delete" method="get">
+                                        <input type="hidden" name="orderid" value="${order.id}" />
+                                        <button class="btn btn-sm btn-success search-btn" type="submit">Cancel</button>
+                                    </form>
+                                </c:if>
                             </td>
                         </tr>
                     </c:forEach>

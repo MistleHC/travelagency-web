@@ -30,6 +30,12 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "aboutme")
+    private String aboutMe;
+
+    @Column(name = "fullname")
+    private String fullName;
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_roles",

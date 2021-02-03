@@ -1,9 +1,9 @@
 package com.gmail.mistle.ibo.travelagency.web.controller;
 
 import com.gmail.mistle.ibo.travelagency.config.security.CustomUserDetails;
-import com.gmail.mistle.ibo.travelagency.model.User;
 import com.gmail.mistle.ibo.travelagency.service.OrderService;
 import com.gmail.mistle.ibo.travelagency.service.UserService;
+import com.gmail.mistle.ibo.travelagency.web.dto.UserInfoDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -21,7 +21,7 @@ public class UserController {
     @GetMapping
     public ModelAndView getCustomerDetails() {
         ModelAndView modelAndView = new ModelAndView("customer_details");
-        User customer = userService.getById(getIdOfCurrentLoggedInUser());
+        UserInfoDto customer = userService.getUserInfo(getIdOfCurrentLoggedInUser());
         modelAndView.addObject("customer", customer);
         modelAndView.addObject("orders", orderService.getAllByUserId(getIdOfCurrentLoggedInUser()));
         return modelAndView;

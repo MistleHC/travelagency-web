@@ -22,4 +22,22 @@ public class OrderController {
         return "redirect:/profile";
     }
 
+    @GetMapping("/delete")
+    public String deleteOrder(@RequestParam(value = "orderid", required = true) String orderId) {
+        if (orderId != null) {
+            orderService.deleteOrder(Long.parseLong(orderId));
+        }
+
+        return "redirect:/profile";
+    }
+
+    @GetMapping("/confirm")
+    public String confirmOrder(@RequestParam(value = "orderid", required = true) String orderId) {
+        if (orderId != null) {
+            orderService.deleteOrder(Long.parseLong(orderId));
+        }
+
+        return "redirect:/profile";
+    }
+
 }

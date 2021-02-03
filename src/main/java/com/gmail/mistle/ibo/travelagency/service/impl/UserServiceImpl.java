@@ -1,5 +1,6 @@
 package com.gmail.mistle.ibo.travelagency.service.impl;
 
+import com.gmail.mistle.ibo.travelagency.web.dto.UserInfoDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -46,6 +47,20 @@ public class UserServiceImpl implements UserService {
                                 .orElseThrow(NotFoundException::new);
         log.info("Gotten user by email {}", email);
         return userByEmail;
+    }
+
+    @Override
+    public UserInfoDto getUserInfo(Long id) {
+        User user = getById(id);
+
+        return UserInfoDto.builder()
+                .email(user.getEmail())
+                .name(user.getName())
+                .aboutMe(user.getAboutMe())
+                .fullName(user.getFullName())
+                .orders(user.getOrders())
+                .roles(user.getRoles())
+                .build();
     }
 
     @Override
