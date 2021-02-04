@@ -34,16 +34,14 @@ public class OrderServiceImpl implements OrderService {
                 .tour(tourService.getById(tourId))
                 .status(statusService.findById((long) 1))
                 .build();
-        log.info("Order object was initialized");
 
-        orderDAO.save(order);
-        log.info("Order was saved");
+        orderDAO.saveAndFlush(order);
     }
 
     @Override
+    @Transactional
     public void deleteOrder(long orderId) {
         orderDAO.deleteById(orderId);
-        log.info("Order with id {} was deleted", orderId);
     }
 
     @Override
@@ -52,7 +50,6 @@ public class OrderServiceImpl implements OrderService {
        Order order = orderDAO.findById(orderId).orElseThrow(NotFoundException::new);
        order.setStatus(statusService.findById((long) 2));
        orderDAO.save(order);
-        log.info("Order with id {} was updated", orderId);
     }
 
     @Override
@@ -61,21 +58,16 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderDAO.findById(orderId).orElseThrow(NotFoundException::new);
         order.setStatus(statusService.findById((long) 3));
         orderDAO.save(order);
-        log.info("Order with id {} was updated", orderId);
     }
 
     @Override
     public List<Order> getAllByUserId(Long userId) {
-        List<Order> usersOrders = orderDAO.findAllByUserId(userId);
-        log.info("List of orders was received from DB for user {}", userId);
-        return usersOrders;
+        return orderDAO.findAllByCustomer_Id(userId);
     }
 
     @Override
     public List<Order> getNewOrders() {
-        List<Order> usersOrders = orderDAO.findNewOrders();
-        log.info("List of new orders was received from DB");
-        return usersOrders;
+        return orderDAO.findAllByStatus_Title("Pending");
     }
 
     private Long getIdOfCurrentLoggedInUser() {

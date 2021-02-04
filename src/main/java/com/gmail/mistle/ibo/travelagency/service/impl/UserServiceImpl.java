@@ -26,27 +26,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<User> getAllByRole(String role) {
-        List<User> usersByRole = userDAO.findAllByRole(role);
-        log.info("Fetched all users by role {}", role);
-        return usersByRole;
+        return userDAO.findAllByRole(role);
     }
 
     @Override
     public User getById(Long id) {
-        User userById = userDAO
-                            .findUserById(id)
-                            .orElseThrow(NotFoundException::new);
-        log.info("Gotten user by id {}", id);
-        return userById;
+        return userDAO.findUserById(id)
+                      .orElseThrow(NotFoundException::new);
     }
 
     @Override
     public User getByEmail(String email) {
-        User userByEmail = userDAO
-                                .findUserByEmail(email)
-                                .orElseThrow(NotFoundException::new);
-        log.info("Gotten user by email {}", email);
-        return userByEmail;
+        return userDAO.findUserByEmail(email)
+                      .orElseThrow(NotFoundException::new);
     }
 
     @Override
@@ -66,7 +58,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         userDAO.save(user);
-        log.info("Saved user");
     }
 
 }

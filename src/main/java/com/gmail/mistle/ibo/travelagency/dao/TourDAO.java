@@ -1,17 +1,14 @@
 package com.gmail.mistle.ibo.travelagency.dao;
 
 import com.gmail.mistle.ibo.travelagency.model.Tour;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public interface TourDAO {
-    List<Tour> findAll();
+public interface TourDAO extends CrudRepository<Tour, Long> {
     List<Tour> findAllByCountry(String country);
-    List<Tour> findAllByHotel(String hotel);
-    List<Tour> findAllByCountryAndHotel(String country, String hotel);
-    List<Tour> findAllByName(String name);
+    List<Tour> findAllByHotelType_Name(String hotel);
+    List<Tour> findAllByCountryAndHotelType_Name(String country, String hotel);
     Optional<Tour> findById(Long id);
-    void save(Tour hotel);
-    void deleteById(Long id);
 }

@@ -26,9 +26,7 @@ public class ManagerController {
     @GetMapping("/delete")
     @PreAuthorize("hasRole('MANAGER')")
     public String deleteOrder(@RequestParam(value = "orderid", required = true) String orderId) {
-        if (orderId != null) {
-            orderService.deleteOrder(Long.parseLong(orderId));
-        }
+        orderService.deleteOrder(Long.parseLong(orderId));
 
         return "redirect:/manage";
     }
@@ -36,9 +34,7 @@ public class ManagerController {
     @GetMapping("/paid")
     @PreAuthorize("hasRole('MANAGER')")
     public String setPaidOrder(@RequestParam(value = "orderid", required = true) String orderId) {
-        if (orderId != null) {
-            orderService.setPaid(Long.parseLong(orderId));
-        }
+        orderService.setPaid(Long.parseLong(orderId));
 
         return "redirect:/manage";
     }
@@ -46,9 +42,7 @@ public class ManagerController {
     @GetMapping("/decline")
     @PreAuthorize("hasRole('MANAGER')")
     public String setDeclinedOrder(@RequestParam(value = "orderid", required = true) String orderId) {
-        if (orderId != null) {
-            orderService.setDecline(Long.parseLong(orderId));
-        }
+        orderService.setDecline(Long.parseLong(orderId));
 
         return "redirect:/manage";
     }

@@ -9,6 +9,8 @@ import com.gmail.mistle.ibo.travelagency.model.Country;
 import com.gmail.mistle.ibo.travelagency.service.CountryService;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Transactional
@@ -19,15 +21,12 @@ public class CountryServiceImpl implements CountryService {
 
     @Override
     public List<Country> getAll() {
-        List<Country> countries = countryDAO.findAll();
-        log.info("List of countries is received from DB");
-        return countries;
+        return StreamSupport.stream(countryDAO.findAll().spliterator(), false)
+                                              .collect(Collectors.toList());
     }
 
     @Override
     public boolean existsByName(String countryName) {
-        boolean existsByCountryName = countryDAO.findByName(countryName).isPresent();
-        log.info(countryName + "exists in DB status: " + existsByCountryName);
-        return existsByCountryName;
+        return countryDAO.findByName(countryName).isPresent();
     }
 }

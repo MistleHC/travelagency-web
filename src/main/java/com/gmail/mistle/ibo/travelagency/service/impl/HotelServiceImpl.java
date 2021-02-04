@@ -8,6 +8,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @Slf4j
@@ -17,8 +19,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public List<HotelType> getAll() {
-        List<HotelType> hotels = hotelDAO.findAll();
-        log.info("List of hotels is received from DB");
-        return hotels;
+        return StreamSupport.stream(hotelDAO.findAll().spliterator(), false)
+                                            .collect(Collectors.toList());
     }
 }

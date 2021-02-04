@@ -73,7 +73,7 @@ public class HibernateConfig {
      * The method stands for creating sessions factory
      * as well as setting up packages to scan
      */
-    @Bean
+    @Bean(name="entityManagerFactory")
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());

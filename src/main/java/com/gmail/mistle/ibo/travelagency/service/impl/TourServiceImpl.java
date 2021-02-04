@@ -14,6 +14,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 @AllArgsConstructor
@@ -24,16 +25,14 @@ public class TourServiceImpl implements TourService {
 
     @Override
     public List<Tour> getAll() {
-        List<Tour> tours = tourDAO.findAll();
-        log.info("All tours were received from DB");
-        return tours;
+        return StreamSupport.stream(tourDAO.findAll().spliterator(), false)
+                                           .collect(Collectors.toList());
     }
 
     @Override
     public Tour getById(long tourId) {
-        return tourDAO
-                .findById(tourId)
-                .orElseThrow(NotFoundException::new);
+        return tourDAO.findById(tourId)
+                      .orElseThrow(NotFoundException::new);
     }
 
     @Override
@@ -43,13 +42,12 @@ public class TourServiceImpl implements TourService {
         if (filter.getHotel().equals("all") && (!filter.getCountry().equals("") && !filter.getCountry().equals("all"))){
             tours = tourDAO.findAllByCountry(filter.getCountry());
         } else if (filter.getCountry().equals("all") && (!filter.getHotel().equals("") && !filter.getHotel().equals("all"))) {
-            tours = tourDAO.findAllByHotel(filter.getHotel());
+            tours = tourDAO.findAllByHotelType_Name(filter.getHotel());
         } else if (!filter.getCountry().equals("") && !filter.getCountry().equals("all") && !filter.getHotel().equals("")) {
-            tours = tourDAO.findAllByCountryAndHotel(filter.getCountry(), filter.getHotel());
+            tours = tourDAO.findAllByCountryAndHotelType_Name(filter.getCountry(), filter.getHotel());
         } else {
             tours = getAll();
         }
-        log.info("Tours were received from DB");
 
         if (!filter.getLowerPrice().equals("")) {
             tours = tours.stream().filter(t -> t.getPrice() > Integer.parseInt(filter.getLowerPrice())).collect(Collectors.toList());
@@ -62,7 +60,7 @@ public class TourServiceImpl implements TourService {
         }
         tours.sort((a, b) -> Boolean.compare(a.isHot(), b.isHot()));
         Collections.reverse(tours);
-        log.info("Tours were filtered");
+
         return tours;
     }
 }

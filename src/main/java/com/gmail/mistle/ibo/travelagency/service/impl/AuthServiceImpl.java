@@ -31,7 +31,6 @@ public class AuthServiceImpl implements AuthService {
         userToRegister.setRoles(new HashSet<>());
         attachRoleToUser(UserRoles.CUSTOMER, userToRegister);
         userService.save(userToRegister);
-        log.info("User has been registered: " + userToRegister);
     }
 
     @Override

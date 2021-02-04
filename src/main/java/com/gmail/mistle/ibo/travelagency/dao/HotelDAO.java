@@ -1,9 +1,7 @@
 package com.gmail.mistle.ibo.travelagency.dao;
 
 import com.gmail.mistle.ibo.travelagency.model.HotelType;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface HotelDAO {
-    List<HotelType> findAll();
+public interface HotelDAO extends CrudRepository<HotelType, Long> {
 }
