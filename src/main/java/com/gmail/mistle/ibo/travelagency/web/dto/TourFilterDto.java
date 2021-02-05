@@ -17,10 +17,10 @@ public class TourFilterDto {
     private String lowerGroup;
 
     public void changeDefaultValues() {
-        if (country == null) {
+        if (country == null || country.equals("all")) {
             country = "";
         }
-        if (hotel == null) {
+        if (hotel == null || hotel.equals("all")) {
             hotel = "";
         }
         if (lowerPrice == null) {

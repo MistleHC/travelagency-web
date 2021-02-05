@@ -44,4 +44,9 @@ public class TourLogAspect {
         log.info("Tour {} was deleted", id);
     }
 
+    @After("execution(* com.gmail.mistle.ibo.travelagency.service.impl.TourServiceImpl.saveNewTour(..))")
+    public void saveNewTour() {
+        log.info("New tour was saved");
+    }
+
 }

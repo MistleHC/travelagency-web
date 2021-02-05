@@ -15,11 +15,14 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
     <div class="bg-light">
         <h1 class="text-center hd-t">Profile</h1><br>
-        <div class="rowa">
+        <div class="row-p col" id="block-p1">
             <h4 class="text-left">Login: ${customer.name}</h4>
             <h4 class="text-left">Full name: ${customer.fullName}</h4>
             <h4 class="text-left">Email: ${customer.email}</h4>
-            <h4 class="text-left">Description: ${customer.aboutMe}</h4>
+            <h4 class="text-left">About me: ${customer.aboutMe}</h4>
+        </div>
+        <div class="col" id="block-p2">
+            <a href="#" data-toggle="modal" data-target="#modaledit" class="btn btn-lg btn-outline btn-primary">Edit<i class="fa fa-long-arrow-right"></i> </a>
         </div>
     </div>
 
@@ -69,6 +72,37 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 </table>
             </c:otherwise>
         </c:choose>
+    </div>
+
+    <!-- Modal - Tour creation -->
+    <div class="modal fade" id="modaledit">
+        <div class="modal-dialog modal-dialog-centered">
+            <form action="${pageContext.request.contextPath}/profile/edit" method="post">
+                <div class="modal-content">
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit profile</h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
+                    </div> <!-- Modal body -->
+                    <div class="modal-body">
+                        <div>
+                            <div>
+                                <div class="product-desc">
+                                    <label for="userFullName" class="form-label">Full name:</label>
+                                    <input name="userFullName" type="text" class="form-control" id="userFullName" placeholder="Name"/>
+                                    <label for="userDescription" class="form-label">About me:</label>
+                                    <textarea rows = "4" cols = "60" name = "userDescription" id="userDescription"></textarea><br>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <!-- Modal footer -->
+                    <sec:authorize access="isAuthenticated()">
+                        <div class="modal-footer">
+                            <button class="btn btn-lg btn-success search-btn" type="submit">Edit</button>
+                        </div>
+                    </sec:authorize>
+                </div>
+            </form>
+        </div>
     </div>
 
 </div>

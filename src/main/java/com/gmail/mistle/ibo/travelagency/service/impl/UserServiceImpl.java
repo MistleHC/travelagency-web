@@ -1,6 +1,7 @@
 package com.gmail.mistle.ibo.travelagency.service.impl;
 
 import com.gmail.mistle.ibo.travelagency.web.dto.UserInfoDto;
+import com.gmail.mistle.ibo.travelagency.web.dto.UserProfileDto;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -58,6 +59,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public void save(User user) {
         userDAO.save(user);
+    }
+
+    @Override
+    @Transactional
+    public User updateUserInfo(UserProfileDto userProfileDto, Long userId) {
+        User user = getById(userId);
+        user.setFullName(userProfileDto.getUserFullName());
+        user.setAboutMe(userProfileDto.getUserDescription());
+        return user;
     }
 
 }

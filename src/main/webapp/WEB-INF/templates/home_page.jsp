@@ -61,9 +61,76 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     <div class="col-auto">
                         <button class="btn btn-lg btn-success search-btn" type="submit">Search</button>
                     </div>
+                    <sec:authorize access="hasAnyRole('ADMIN')">
+                        <div class="col-auto">
+                            <a href="#" data-toggle="modal" data-target="#modalcreate" class="btn btn-lg btn-outline btn-primary">Create<i class="fa fa-long-arrow-right"></i> </a>
+                        </div>
+                    </sec:authorize>
                 </div>
             </form>
         </div>
+
+    <!-- Modal - Tour creation -->
+    <div class="modal fade" id="modalcreate">
+        <div class="modal-dialog modal-dialog-centered">
+            <form action="${pageContext.request.contextPath}/tour/create" method="post">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Create new tour</h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
+                </div> <!-- Modal body -->
+                <div class="modal-body">
+                    <div>
+                        <div>
+                            <div class="product-desc">
+                                <label for="tourName" class="form-label">Tour name:</label>
+                                <input name="tourName" type="text" class="form-control" id="tourName" placeholder="Name"/>
+                                <label for="tourDescription" class="form-label">Tour description:</label>
+                                <textarea rows = "4" cols = "60" name = "tourDescription" id="tourDescription">
+                                </textarea><br>
+                                <label class="form-label">Tour type:</label>
+                                <label>
+                                    <select class="form-select form-select-lg sel-tx" name="tourType">
+                                        <c:forEach items="${tourTypes}" var="ttype">
+                                            <option value="${ttype.name}">${ttype.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </label> <br>
+                                <label class="form-label">Country:</label>
+                                <label>
+                                    <select class="form-select form-select-lg sel-tx" name="tourCountry">
+                                        <c:forEach items="${countries}" var="country">
+                                            <option value="${country.name}">${country.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </label> <br>
+                                <label for="tourSize" class="form-label">Group size:</label>
+                                <input name="tourSize" type="text" class="form-control" id="tourSize" placeholder="0" pattern="[0-9]{0,2}"/>
+                                <label class="form-label">Hotel type:</label>
+                                <label>
+                                    <select class="form-select form-select-lg sel-tx" name="tourHotel">
+                                        <c:forEach items="${hotels}" var="hotel">
+                                            <option value="${hotel.name}">${hotel.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                </label> <br>
+                                <label for="tourPrice" class="form-label">Price: </label>
+                                <input name="tourPrice" type="text" class="form-control" id="tourPrice" placeholder="UAH" pattern="[0-9]{0,10}"/>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Modal footer -->
+                <sec:authorize access="isAuthenticated()">
+                    <div class="modal-footer">
+                        <sec:authorize access="hasAnyRole('ADMIN')">
+                            <button class="btn btn-lg btn-success search-btn" type="submit">Create</button>
+                        </sec:authorize>
+                    </div>
+                </sec:authorize>
+            </div>
+            </form>
+        </div>
+    </div>
 
     <div class="row">
 

@@ -1,4 +1,4 @@
-body{
+body {
     margin-top:20px;
     padding-right: 10%;
     padding-left: 10%;
@@ -224,4 +224,22 @@ table.shoping-cart-table tr td:last-child {
     margin-left: auto;
     margin-right: auto;
     width: 26%;
+}
+
+.check-b {
+    background-color: #f8f8f9;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.row-p {
+    padding:  0 50% 9px 20px;
+}
+
+/*#block-p1, #block-p2*/
+/*{*/
+/*    display:inline;*/
+/*}*/
+#block-p2 {
+    padding: 0 0 0 5%;
 }

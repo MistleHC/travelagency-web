@@ -38,4 +38,9 @@ public class UserLogAspect {
     public void getAllByRole() {
         log.info("Saved user");
     }
+
+    @After("execution(* com.gmail.mistle.ibo.travelagency.service.impl.UserServiceImpl.updateUserInfo(..))")
+    public void updateUserInfo() {
+        log.info("User info was updated");
+    }
 }

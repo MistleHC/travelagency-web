@@ -2,17 +2,18 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
-    <jsp:include page="head.jsp">
+    <jsp:include page="home_head.jsp">
         <jsp:param name="titleName" value="Register"/>
     </jsp:include>
 <body>
 <div class="container-fluid">
+    <jsp:include page="navbar.jsp"/>
 
-    <div class="row m-2">
+    <div class="row check-b">
         <h1 class="text-center">Registration form</h1>
     </div>
 
-    <div class="row">
+    <div class="row check-b">
         <form:form action="/register" method="post" modelAttribute="userToRegister">
 
             <div class="mb-3">

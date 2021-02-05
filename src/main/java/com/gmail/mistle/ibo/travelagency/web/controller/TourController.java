@@ -1,12 +1,11 @@
 package com.gmail.mistle.ibo.travelagency.web.controller;
 
 import com.gmail.mistle.ibo.travelagency.service.TourService;
+import com.gmail.mistle.ibo.travelagency.web.dto.TourCreationDto;
 import lombok.AllArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -35,6 +34,14 @@ public class TourController {
     @PreAuthorize("hasRole('ADMIN')")
     public String deleteTour(@RequestParam(value = "tourid", required = true) String tourId) {
         tourService.deleteById(Long.parseLong(tourId));
+
+        return "redirect:/";
+    }
+
+    @PostMapping("/create")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String createTour(TourCreationDto tourCreationDto) {
+        tourService.saveNewTour(tourCreationDto);
 
         return "redirect:/";
     }

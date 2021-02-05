@@ -55,6 +55,7 @@ public class HomeController {
         modelAndView.addObject("tours", tourService.getAllByFilter(filter));
         modelAndView.addObject("countries", countryService.getAll());
         modelAndView.addObject("hotels", hotelService.getAll());
+        modelAndView.addObject("tourTypes", tourService.getTourTypes());
         return modelAndView;
     }
 }
