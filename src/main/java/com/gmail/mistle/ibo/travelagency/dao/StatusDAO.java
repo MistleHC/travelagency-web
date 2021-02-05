@@ -6,5 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.Optional;
 
 public interface StatusDAO extends CrudRepository<Status, Long> {
+
     Optional<Status> findById(Long id);
+
 }

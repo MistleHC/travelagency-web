@@ -63,4 +63,14 @@ public class TourServiceImpl implements TourService {
 
         return tours;
     }
+
+    @Override
+    public void setHot(Long tourId) {
+        tourDAO.setHot(tourId, true);
+    }
+
+    @Override
+    public void setNotHot(Long tourId) {
+        tourDAO.setHot(tourId, false);
+    }
 }

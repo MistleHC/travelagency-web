@@ -9,4 +9,6 @@ public interface TourService {
     List<Tour> getAll();
     Tour getById(long tourId);
     List<Tour> getAllByFilter(TourFilterDto filter);
+    void setHot(Long tourId);
+    void setNotHot(Long tourId);
 }

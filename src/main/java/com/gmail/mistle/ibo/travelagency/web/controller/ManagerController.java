@@ -16,7 +16,7 @@ public class ManagerController {
     private final OrderService orderService;
 
     @GetMapping
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     public ModelAndView getManagementDetails() {
         ModelAndView modelAndView = new ModelAndView("management");
         modelAndView.addObject("orders", orderService.getNewOrders());
@@ -24,7 +24,7 @@ public class ManagerController {
     }
 
     @GetMapping("/delete")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     public String deleteOrder(@RequestParam(value = "orderid", required = true) String orderId) {
         orderService.deleteOrder(Long.parseLong(orderId));
 
@@ -32,7 +32,7 @@ public class ManagerController {
     }
 
     @GetMapping("/paid")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     public String setPaidOrder(@RequestParam(value = "orderid", required = true) String orderId) {
         orderService.setPaid(Long.parseLong(orderId));
 
@@ -40,7 +40,7 @@ public class ManagerController {
     }
 
     @GetMapping("/decline")
-    @PreAuthorize("hasRole('MANAGER')")
+    @PreAuthorize("hasAnyRole('MANAGER', 'ADMIN')")
     public String setDeclinedOrder(@RequestParam(value = "orderid", required = true) String orderId) {
         orderService.setDecline(Long.parseLong(orderId));
 

@@ -48,14 +48,14 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                         </label>
                         <h3 class="h-in">Price: </h3>
                         <label>
-                            <input type="text" class="form-control" name="lowerprice" placeholder="More than (UAH)">
+                            <input type="text" class="form-control" name="lowerprice" placeholder="More than (UAH)" pattern="[0-9]{0,10}">
                         </label>
                         <label>
-                            <input type="text" class="form-control" name="higherprice" placeholder="Less than (UAH)">
+                            <input type="text" class="form-control" name="higherprice" placeholder="Less than (UAH)" pattern="[0-9]{0,10}">
                         </label>
                         <h3 class="h-in">Group size:</h3>
                         <label>
-                            <input type="text" class="form-control" name="lowergroup" placeholder="Less than...">
+                            <input type="text" class="form-control" name="lowergroup" placeholder="Less than..." pattern="[0-9]{0,2}>
                         </label>
                     </div>
                     <div class="col-auto">
@@ -111,6 +111,16 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                                         <input type="hidden" name="tourid" value="${tour.id}" />
                                         <button class="btn btn-lg btn-success search-btn" type="submit">Buy</button>
                                     </form>
+                                    <sec:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
+                                        <form action="/tour/hot" method="get">
+                                            <input type="hidden" name="tourid" value="${tour.id}" />
+                                            <button class="btn btn-lg btn-warning search-btn" type="submit">Set as hot!</button>
+                                        </form>
+                                        <form action="/tour/de-hot" method="get">
+                                            <input type="hidden" name="tourid" value="${tour.id}" />
+                                            <button class="btn btn-lg btn-warning search-btn" type="submit">Set as not hot!</button>
+                                        </form>
+                                    </sec:authorize>
                                 </div>
                                 </sec:authorize>
                             </div>
@@ -120,7 +130,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <div class="col-md-3 item-row">
                     <div class="ibox">
                         <div class="ibox-content product-box">
-                            <div class="product-imitation" id="imgcont">
+                            <div data-toggle="modal" data-target="#modal${tour.id}" class="product-imitation" id="imgcont">
                                 <script type="text/javascript">
                                     document.write(getImageTag());
                                 </script>
@@ -130,7 +140,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                             ${tour.price} UAH
                     </span>
                                 <small class="text-muted">${tour.tourType.name}</small>
-                                <a href="#" class="product-name">${tour.name}</a>
+                                <a href="#" data-toggle="modal" data-target="#modal${tour.id}" class="product-name">${tour.name}</a>
 
                                 <div class="small m-t-xs">
                                         Max group size: ${tour.peoples}

@@ -20,7 +20,7 @@
                     <a class="nav-link" href="<c:url value="/login"/>">Login</a>
                 </li>
             </sec:authorize>
-            <sec:authorize access="hasRole('MANAGER')">
+            <sec:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
                 <li class="nav-item">
                     <a class="nav-link" href="<c:url value="/manage"/>">Management</a>
                 </li>
