@@ -1,7 +1,7 @@
 package com.gmail.mistle.ibo.travelagency.config.constants;
 
 public enum UserRoles {
-    CUSTOMER("CUSTOMER"), MANAGER("MANAGER");
+    CUSTOMER("CUSTOMER"), MANAGER("MANAGER"), ADMIN("ADMIN");
 
     private final String roleName;
 

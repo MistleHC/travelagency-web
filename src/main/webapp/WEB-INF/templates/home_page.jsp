@@ -2,6 +2,7 @@
          pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -11,6 +12,11 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <body>
 
 <div class="container-fluid">
+    <jsp:useBean id="pagedListHolder" scope="request" type="org.springframework.beans.support.PagedListHolder" />
+    <c:url value="/" var="pagedLink">
+        <c:param name="p" value="~" />
+    </c:url>
+
     <jsp:include page="navbar.jsp"/>
 
 
@@ -66,7 +72,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <h4>No tours available right now :(</h4>
             </c:when>
             <c:otherwise>
-                <c:forEach items="${tours}" var="tour">
+                <c:forEach items="${pagedListHolder.pageList}" var="tour">
 
                     <!-- Modal -->
                     <div class="modal fade" id="modal${tour.id}">
@@ -140,6 +146,9 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     </div>
                 </div>
                 </c:forEach>
+            <div class="pagging">
+                <tg:paging pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
+            </div>
             </c:otherwise>
         </c:choose>
     </div>

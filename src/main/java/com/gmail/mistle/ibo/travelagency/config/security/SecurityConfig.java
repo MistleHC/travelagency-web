@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/register", "errors/**", "/", "/login")
+                .antMatchers("/resources/**", "/register", "errors/**", "/", "/page/**","/login")
                     .permitAll()
                 .antMatchers("/hotels/**", "/rooms/**", "/management/**").hasRole(UserRoles.MANAGER.toString())
                 .antMatchers("/admin/**").hasIpAddress(env.getRequiredProperty("user.ip_address"))
