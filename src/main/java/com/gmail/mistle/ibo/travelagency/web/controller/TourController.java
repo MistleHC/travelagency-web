@@ -30,4 +30,12 @@ public class TourController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/delete")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String deleteTour(@RequestParam(value = "tourid", required = true) String tourId) {
+        tourService.deleteById(Long.parseLong(tourId));
+
+        return "redirect:/";
+    }
 }

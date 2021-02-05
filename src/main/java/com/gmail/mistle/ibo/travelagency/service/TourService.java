@@ -11,4 +11,5 @@ public interface TourService {
     List<Tour> getAllByFilter(TourFilterDto filter);
     void setHot(Long tourId);
     void setNotHot(Long tourId);
+    void deleteById(Long tourId);
 }

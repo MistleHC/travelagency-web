@@ -27,14 +27,21 @@ public class TourLogAspect {
     public void setHot(JoinPoint joinPoint) {
         Object[] lArgs = joinPoint.getArgs();
         long id = (long) lArgs[0];
-        log.info("Tours {} was marked as hot", id);
+        log.info("Tour {} was marked as hot", id);
     }
 
     @After("execution(* com.gmail.mistle.ibo.travelagency.service.impl.TourServiceImpl.setNotHot(..))")
     public void setNotHot(JoinPoint joinPoint) {
         Object[] lArgs = joinPoint.getArgs();
         long id = (long) lArgs[0];
-        log.info("Tours {} was marked as NOT hot", id);
+        log.info("Tour {} was marked as NOT hot", id);
+    }
+
+    @After("execution(* com.gmail.mistle.ibo.travelagency.service.impl.TourServiceImpl.deleteById(..))")
+    public void deleteById(JoinPoint joinPoint) {
+        Object[] lArgs = joinPoint.getArgs();
+        long id = (long) lArgs[0];
+        log.info("Tour {} was deleted", id);
     }
 
 }

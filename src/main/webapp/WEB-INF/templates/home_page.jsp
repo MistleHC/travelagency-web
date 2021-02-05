@@ -55,7 +55,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                         </label>
                         <h3 class="h-in">Group size:</h3>
                         <label>
-                            <input type="text" class="form-control" name="lowergroup" placeholder="Less than..." pattern="[0-9]{0,2}>
+                            <input type="text" class="form-control" name="lowergroup" placeholder="Less than..." pattern="[0-9]{0,2}">
                         </label>
                     </div>
                     <div class="col-auto">
@@ -119,6 +119,12 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                                         <form action="/tour/de-hot" method="get">
                                             <input type="hidden" name="tourid" value="${tour.id}" />
                                             <button class="btn btn-lg btn-warning search-btn" type="submit">Set as not hot!</button>
+                                        </form>
+                                    </sec:authorize>
+                                    <sec:authorize access="hasAnyRole('ADMIN')">
+                                        <form action="/tour/delete" method="get">
+                                            <input type="hidden" name="tourid" value="${tour.id}" />
+                                            <button class="btn btn-lg btn-danger search-btn" type="submit">Delete</button>
                                         </form>
                                     </sec:authorize>
                                 </div>
