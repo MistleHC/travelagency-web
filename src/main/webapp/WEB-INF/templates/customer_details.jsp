@@ -1,9 +1,8 @@
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
-Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
 <jsp:include page="home_head.jsp">
     <jsp:param name="titleName" value="Customer details"/>
@@ -14,20 +13,20 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <jsp:include page="navbar.jsp"/>
 
     <div class="bg-light">
-        <h1 class="text-center hd-t">Profile</h1><br>
+        <h1 class="text-center hd-t"><spring:message code="profile.title" text="Profile" /></h1><br>
         <div class="row-p col" id="block-p1">
-            <h4 class="text-left">Login: ${customer.name}</h4>
-            <h4 class="text-left">Full name: ${customer.fullName}</h4>
-            <h4 class="text-left">Email: ${customer.email}</h4>
-            <h4 class="text-left">About me: ${customer.aboutMe}</h4>
+            <h4 class="text-left"><spring:message code="profile.login" text="Login:" /> ${customer.name}</h4>
+            <h4 class="text-left"><spring:message code="profile.name" text="Full name:" /> ${customer.fullName}</h4>
+            <h4 class="text-left"><spring:message code="profile.email" text="Email:" /> ${customer.email}</h4>
+            <h4 class="text-left"><spring:message code="profile.about" text="About me:" /> ${customer.aboutMe}</h4>
         </div>
         <div class="col" id="block-p2">
-            <a href="#" data-toggle="modal" data-target="#modaledit" class="btn btn-lg btn-outline btn-primary">Edit<i class="fa fa-long-arrow-right"></i> </a>
+            <a href="#" data-toggle="modal" data-target="#modaledit" class="btn btn-lg btn-outline btn-primary"><spring:message code="profile.edit" text="Edit" /><i class="fa fa-long-arrow-right"></i> </a>
         </div>
     </div>
 
     <div class="bg-light">
-        <h1 class="text-center">Orders</h1><br>
+        <h1 class="text-center"><spring:message code="profile.orders" text="Orders" /></h1><br>
         <c:choose>
             <c:when test="${empty orders}">
                 <h4>User has no orders</h4>
@@ -35,12 +34,12 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
             <c:otherwise>
                 <table class="table table-hover table-bordered">
                     <tr>
-                        <th scope="col">ID</th>
-                        <th scope="col">Tour name</th>
-                        <th scope="col">Tour type</th>
-                        <th scope="col">Hotel type</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col"><spring:message code="profile.o.tourid" text="ID" /></th>
+                        <th scope="col"><spring:message code="profile.o.name" text="Tour name" /></th>
+                        <th scope="col"><spring:message code="profile.o.type" text="Tour type" /></th>
+                        <th scope="col"><spring:message code="profile.o.hotel" text="Hotel type" /></th>
+                        <th scope="col"><spring:message code="profile.o.status" text="Status" /></th>
+                        <th scope="col"><spring:message code="profile.o.actions" text="Actions" /></th>
                     </tr>
                     <c:forEach items="${orders}" var="order">
                         <tr>
@@ -63,7 +62,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                                 <c:if test = "${order.status.id == 1}">
                                     <form action="/order/delete" method="get">
                                         <input type="hidden" name="orderid" value="${order.id}" />
-                                        <button class="btn btn-sm btn-success search-btn" type="submit">Cancel</button>
+                                        <button class="btn btn-sm btn-success search-btn" type="submit"><spring:message code="profile.o.cancel" text="Cancel" /></button>
                                     </form>
                                 </c:if>
                             </td>
@@ -81,15 +80,15 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <div class="modal-content">
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit profile</h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"><spring:message code="profile.e.edit" text="Edit profile" /></h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
                     </div> <!-- Modal body -->
                     <div class="modal-body">
                         <div>
                             <div>
                                 <div class="product-desc">
-                                    <label for="userFullName" class="form-label">Full name:</label>
+                                    <label for="userFullName" class="form-label"><spring:message code="profile.name" text="Full name:" /></label>
                                     <input name="userFullName" type="text" class="form-control" id="userFullName" placeholder="Name"/>
-                                    <label for="userDescription" class="form-label">About me:</label>
+                                    <label for="userDescription" class="form-label"><spring:message code="profile.about" text="About me:" /></label>
                                     <textarea rows = "4" cols = "60" name = "userDescription" id="userDescription"></textarea><br>
                                 </div>
                             </div>
@@ -97,7 +96,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                     </div> <!-- Modal footer -->
                     <sec:authorize access="isAuthenticated()">
                         <div class="modal-footer">
-                            <button class="btn btn-lg btn-success search-btn" type="submit">Edit</button>
+                            <button class="btn btn-lg btn-success search-btn" type="submit"><spring:message code="profile.edit" text="Edit" /></button>
                         </div>
                     </sec:authorize>
                 </div>

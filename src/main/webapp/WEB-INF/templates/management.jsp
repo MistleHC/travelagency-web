@@ -1,9 +1,8 @@
-<%@ page contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01
-Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+
 <html>
 <jsp:include page="home_head.jsp">
     <jsp:param name="titleName" value="Management"/>
@@ -14,7 +13,7 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
     <jsp:include page="navbar.jsp"/>
 
     <div class="bg-light">
-        <h1 class="text-center">Orders</h1><br>
+        <h1 class="text-center"><spring:message code="man.title" text="Orders" /></h1><br>
         <c:choose>
             <c:when test="${empty orders}">
                 <h4>There no orders</h4>
@@ -23,10 +22,10 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                 <table class="table table-hover table-bordered">
                     <tr>
                         <th scope="col">ID</th>
-                        <th scope="col">Customer ID</th>
-                        <th scope="col">Customer login</th>
-                        <th scope="col">Tour name</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col"><spring:message code="man.customer.id" text="Customer ID" /></th>
+                        <th scope="col"><spring:message code="man.customer.login" text="Customer login" /></th>
+                        <th scope="col"><spring:message code="man.tour.name" text="Tour name" /></th>
+                        <th scope="col"><spring:message code="man.actions" text="Actions" /></th>
                     </tr>
                     <c:forEach items="${orders}" var="order">
                         <tr>
@@ -47,19 +46,19 @@ Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
                                     <div class="col-md-2">
                                         <form action="/manage/paid" method="get">
                                             <input type="hidden" name="orderid" value="${order.id}" />
-                                            <button class="btn btn-sm btn-success search-btn" type="submit">Paid</button>
+                                            <button class="btn btn-sm btn-success search-btn" type="submit"><spring:message code="man.a.paid" text="Paid" /></button>
                                         </form>
                                     </div>
                                     <div class="col-md-2">
                                         <form action="/manage/decline" method="get">
                                             <input type="hidden" name="orderid" value="${order.id}" />
-                                            <button class="btn btn-sm btn-success search-btn" type="submit">Decline</button>
+                                            <button class="btn btn-sm btn-warning search-btn" type="submit"><spring:message code="man.a.decline" text="Decline" /></button>
                                         </form>
                                     </div>
                                     <div class="col-md-2">
                                         <form action="/manage/delete" method="get">
                                             <input type="hidden" name="orderid" value="${order.id}" />
-                                            <button class="btn btn-sm btn-success search-btn" type="submit">Delete</button>
+                                            <button class="btn btn-sm btn-danger search-btn" type="submit"><spring:message code="man.a.delete" text="Delete" /></button>
                                         </form>
                                     </div>
                                 </div>
