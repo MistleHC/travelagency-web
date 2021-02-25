@@ -57,9 +57,9 @@ public class AuthServiceImpl implements AuthService {
     private void detachRoleToUser(UserRoles roleToDetach, User user) {
         Set<Role> currentRoles = user.getRoles();
         Set<Role> filteredRoles = currentRoles
-                .stream()
-                .filter(role -> !role.getName().equals(roleToDetach.toString()))
-                .collect(Collectors.toSet());
+                                        .stream()
+                                        .filter(role -> !role.getName().equals(roleToDetach.toString()))
+                                        .collect(Collectors.toSet());
         user.setRoles(filteredRoles);
     }
 
