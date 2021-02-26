@@ -185,6 +185,9 @@
                                             <input type="hidden" name="tourid" value="${tour.id}" />
                                             <button class="btn btn-lg btn-warning search-btn" type="submit"><spring:message code="item.nothot" text="Set as not hot!" /></button>
                                         </form>
+                                        <sec:authorize access="hasAnyRole('ADMIN')">
+                                            <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#modaldiscount${tour.id}" class="btn btn-lg btn-outline btn-primary"><spring:message code="disc.set" text="Set discount" /><i class="fa fa-long-arrow-right"></i> </a>
+                                        </sec:authorize>
                                     </sec:authorize>
                                     <sec:authorize access="hasAnyRole('ADMIN')">
                                         <form action="/tour/delete" method="get">
@@ -195,6 +198,38 @@
                                 </div>
                                 </sec:authorize>
                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal - Discount creation -->
+                    <div class="modal fade" id="modaldiscount${tour.id}">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <form action="${pageContext.request.contextPath}/tour/discount" method="post">
+                                <div class="modal-content">
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Create new tour</h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
+                                    </div> <!-- Modal body -->
+                                    <div class="modal-body">
+                                        <div>
+                                            <div>
+                                                <div class="product-desc">
+                                                    <input type="hidden" name="tourid" value="${tour.id}" />
+                                                    <label for="tourDiscount" class="form-label"><spring:message code="disc.discount" text="Discount:" /></label>
+                                                    <input name="tourDiscount" type="text" class="form-control" id="tourDiscount" placeholder="%" required="required" pattern="[0-9]{1,2}"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div> <!-- Modal footer -->
+                                    <sec:authorize access="isAuthenticated()">
+                                        <div class="modal-footer">
+                                            <sec:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
+                                                <button class="btn btn-lg btn-success search-btn" type="submit"><spring:message code="search.create" text="Create" /></button>
+                                            </sec:authorize>
+                                        </div>
+                                    </sec:authorize>
+                                </div>
+                            </form>
                         </div>
                     </div>
 

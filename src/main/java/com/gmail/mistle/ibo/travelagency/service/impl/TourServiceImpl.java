@@ -82,6 +82,13 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
+    public void setDiscount(Long tourId, Long discount) {
+        Tour tour = tourDAO.findById(tourId).orElseThrow(NotFoundException::new);
+        tour.setDiscount(discount);
+        tourDAO.save(tour);
+    }
+
+    @Override
     @Transactional
     public Tour saveNewTour(TourCreationDto tourCreationDto) {
         try {
