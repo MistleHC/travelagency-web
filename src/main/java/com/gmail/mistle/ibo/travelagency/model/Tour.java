@@ -31,6 +31,9 @@ public class Tour {
     @Column(name = "price")
     private Long price;
 
+    @Column(name = "discount")
+    private Long discount;
+
     @Column(name = "is_hot")
     private boolean isHot;
 

@@ -38,6 +38,7 @@
                         <th scope="col"><spring:message code="profile.o.name" text="Tour name" /></th>
                         <th scope="col"><spring:message code="profile.o.type" text="Tour type" /></th>
                         <th scope="col"><spring:message code="profile.o.hotel" text="Hotel type" /></th>
+                        <th scope="col"><spring:message code="profile.o.price" text="Price" /></th>
                         <th scope="col"><spring:message code="profile.o.status" text="Status" /></th>
                         <th scope="col"><spring:message code="profile.o.actions" text="Actions" /></th>
                     </tr>
@@ -54,6 +55,9 @@
                             </td>
                             <td>
                                     ${order.tour.hotelType.name}
+                            </td>
+                            <td>
+                                    ${order.tour.price - (order.tour.price * order.tour.discount / 100)} UAH
                             </td>
                             <td>
                                     ${order.status.title}

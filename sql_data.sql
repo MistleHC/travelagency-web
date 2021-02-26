@@ -27,5 +27,5 @@ INSERT INTO statuses (title) VALUES ('registred');
 INSERT INTO statuses (title) VALUES ('payed');
 INSERT INTO statuses (title) VALUES ('declined');
 
-INSERT INTO tours (name, description, country, peoples, hotel_type_id, tour_type_id) 
-VALUES ('Test tour', 'Test description', 'Japan', 2, 1, 1);
+INSERT INTO tours (name, description, country, peoples, hotel_type_id, tour_type_id, price, discount, is_hot)
+VALUES ('Test tour', 'Test description', 'Japan', 2, 1, 1, 20000, 0, true);

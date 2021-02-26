@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<%@ taglib prefix="tg" tagdir="/WEB-INF/tags"%>
 <%@ page contentType="text/html;charset=UTF-8" %>
 
 <html>
@@ -83,9 +82,9 @@
                         <div>
                             <div class="product-desc">
                                 <label for="tourName" class="form-label"><spring:message code="create.name" text="Tour name:" /></label>
-                                <input name="tourName" type="text" class="form-control" id="tourName" placeholder="Name"/>
+                                <input name="tourName" type="text" class="form-control" id="tourName" required="required" placeholder="Name"/>
                                 <label for="tourDescription" class="form-label"><spring:message code="create.description" text="Tour description:" /></label>
-                                <textarea rows = "4" cols = "60" name = "tourDescription" id="tourDescription">
+                                <textarea rows = "4" cols = "60" name = "tourDescription" required="required" id="tourDescription">
                                 </textarea><br>
                                 <label class="form-label"><spring:message code="create.type" text="Tour type:" /></label>
                                 <label>
@@ -104,7 +103,7 @@
                                     </select>
                                 </label> <br>
                                 <label for="tourSize" class="form-label"><spring:message code="create.group" text="Group size:" /></label>
-                                <input name="tourSize" type="text" class="form-control" id="tourSize" placeholder="0" pattern="[0-9]{0,2}"/>
+                                <input name="tourSize" type="text" class="form-control" id="tourSize" placeholder="0" required="required" pattern="[0-9]{1,2}"/>
                                 <label class="form-label"><spring:message code="create.hotel" text="Hotel type:" /></label>
                                 <label>
                                     <select class="form-select form-select-lg sel-tx" name="tourHotel">
@@ -114,7 +113,7 @@
                                     </select>
                                 </label> <br>
                                 <label for="tourPrice" class="form-label"><spring:message code="create.price" text="Price:" /></label>
-                                <input name="tourPrice" type="text" class="form-control" id="tourPrice" placeholder="UAH" pattern="[0-9]{0,10}"/>
+                                <input name="tourPrice" type="text" class="form-control" id="tourPrice" placeholder="UAH" required="required" pattern="[0-9]{1,10}"/>
                             </div>
                         </div>
                     </div>
@@ -158,7 +157,7 @@
                                             </div>
                                             <div class="product-desc">
                                                 <span class="product-price">
-                                                        ${tour.price} UAH
+                                                        ${tour.price - (tour.price * tour.discount / 100)} UAH
                                                 </span>
                                                 <h4 class="pro-name">${tour.name}</h4><br>
                                                 <p class="prod-name"><spring:message code="create.type" text="Tour type:" /> ${tour.tourType.name}</p>
@@ -166,7 +165,7 @@
                                                 <p class="prod-name"><spring:message code="create.group" text="Group size:" /> ${tour.peoples}</p><br>
                                                 <p class="prod-name">${tour.description}</p><br>
                                                 <p class="prod-name"></p>
-                                                <p class="prod-name"><spring:message code="create.price" text="Price:" /> ${tour.price}</p>
+                                                <p class="prod-name"><spring:message code="create.price" text="Price:" /> ${tour.price - (tour.price * tour.discount / 100)}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -209,7 +208,7 @@
                             </div>
                             <div class="product-desc">
                     <span class="product-price">
-                            ${tour.price} UAH
+                            ${tour.price - (tour.price * tour.discount / 100)} UAH
                     </span>
                                 <small class="text-muted">${tour.tourType.name}</small>
                                 <a href="#" data-toggle="modal" data-target="#modal${tour.id}" class="product-name">${tour.name}</a>

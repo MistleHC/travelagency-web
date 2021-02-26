@@ -4,11 +4,13 @@ import com.gmail.mistle.ibo.travelagency.dao.HotelDAO;
 import com.gmail.mistle.ibo.travelagency.dao.TourDAO;
 import com.gmail.mistle.ibo.travelagency.dao.TourTypeDAO;
 import com.gmail.mistle.ibo.travelagency.exceptions.NotFoundException;
+import com.gmail.mistle.ibo.travelagency.exceptions.ValidationException;
 import com.gmail.mistle.ibo.travelagency.model.Tour;
 import com.gmail.mistle.ibo.travelagency.model.TourType;
 import com.gmail.mistle.ibo.travelagency.service.TourService;
 import com.gmail.mistle.ibo.travelagency.web.dto.TourCreationDto;
 import com.gmail.mistle.ibo.travelagency.web.dto.TourFilterDto;
+import com.gmail.mistle.ibo.travelagency.web.validator.TourCreationValidator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -82,6 +84,13 @@ public class TourServiceImpl implements TourService {
     @Override
     @Transactional
     public Tour saveNewTour(TourCreationDto tourCreationDto) {
+        try {
+            TourCreationValidator.validate(tourCreationDto);
+        } catch (ValidationException ex) {
+            log.error("Tour creation validation exception. Error: " + ex.getMessage());
+            return null;
+        }
+
         Tour tour = Tour.builder()
                 .name(tourCreationDto.getTourName())
                 .description(tourCreationDto.getTourDescription())

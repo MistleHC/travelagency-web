@@ -25,6 +25,7 @@
                         <th scope="col"><spring:message code="man.customer.id" text="Customer ID" /></th>
                         <th scope="col"><spring:message code="man.customer.login" text="Customer login" /></th>
                         <th scope="col"><spring:message code="man.tour.name" text="Tour name" /></th>
+                        <th scope="col"><spring:message code="profile.o.price" text="Price" /></th>
                         <th scope="col"><spring:message code="man.actions" text="Actions" /></th>
                     </tr>
                     <c:forEach items="${orders}" var="order">
@@ -40,6 +41,9 @@
                             </td>
                             <td>
                                     ${order.tour.name}
+                            </td>
+                            <td>
+                                    ${order.tour.price - (order.tour.price * order.tour.discount / 100)} UAH
                             </td>
                             <td>
                                 <div class="card-body row no-gutters align-items-center">

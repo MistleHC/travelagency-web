@@ -25,6 +25,8 @@ create table if not exists tours (
     hotel_type_id int not null,
     tour_type_id int not null,
     is_hot boolean NOT NULL,
+    discount int not null,
+    price int not null,
 	
       CONSTRAINT tour_type_pk FOREIGN KEY (tour_type_id)
 		  REFERENCES tour_types (id) MATCH SIMPLE
@@ -95,17 +97,5 @@ create table if not exists orders (
 			  ON UPDATE CASCADE ON DELETE CASCADE,
 		CONSTRAINT tour_pk FOREIGN KEY (tour_id)
 			  REFERENCES tours (id) MATCH SIMPLE
-			  ON UPDATE CASCADE ON DELETE CASCADE
-);
-
-create sequence images_seq;
-
-create table if not exists images (
-    id int primary key default nextval ('images_seq'),
-	image bytea not null,
-    country_id int not null,
-	
-		CONSTRAINT country_pk FOREIGN KEY (country_id)
-			  REFERENCES countries (id) MATCH SIMPLE
 			  ON UPDATE CASCADE ON DELETE CASCADE
 );
