@@ -26,11 +26,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> getAllByRole(String role) {
-        return userDAO.findAllByRole(role);
-    }
-
-    @Override
     public User getById(Long id) {
         return userDAO.findUserById(id)
                       .orElseThrow(NotFoundException::new);

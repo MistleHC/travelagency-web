@@ -26,13 +26,12 @@ public class HomeController {
     private final CountryService countryService;
     private final HotelService hotelService;
 
-    @GetMapping(value = {"/", "/page/{pageid}"})
+    @GetMapping("/")
     public ModelAndView showAllTours(@RequestParam(value = "country", required = false) String country,
                                      @RequestParam(value = "hotel", required = false) String hotel,
                                      @RequestParam(value = "lowerprice", required = false) String lowerPrice,
                                      @RequestParam(value = "higherprice", required = false) String higherPrice,
                                      @RequestParam(value = "lowergroup", required = false) String lowerGroup,
-                                     @PathVariable(required = false) Integer pageId,
                                      HttpServletRequest request) {
         ModelAndView modelAndView = new ModelAndView("home_page");
 
@@ -47,9 +46,13 @@ public class HomeController {
 
         List<Tour> tours = tourService.getAllByFilter(filter);
         PagedListHolder<Tour> pagedListHolder = new PagedListHolder<>(tours);
-        int page = ServletRequestUtils.getIntParameter(request, "p", 0);
+        int page = ServletRequestUtils.getIntParameter(request, "page", 0);
         pagedListHolder.setPage(page);
         pagedListHolder.setPageSize(12);
+
+        modelAndView.addObject("currentPage", page);
+        modelAndView.addObject("noOfPages", tours.size()/12);
+        modelAndView.addObject("recordsPerPage", 12);
 
         modelAndView.addObject("pagedListHolder", pagedListHolder);
         modelAndView.addObject("tours", tourService.getAllByFilter(filter));

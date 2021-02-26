@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface UserService {
     List<User> getAll();
-    List<User> getAllByRole(String role);
     User getById(Long id);
     User getByEmail(String email);
     UserInfoDto getUserInfo(Long id);

@@ -229,7 +229,29 @@
                 </div>
                 </c:forEach>
             <div class="pagging">
-                <tg:paging pagedListHolder="${pagedListHolder}" pagedLink="${pagedLink}" />
+                <ul class="pagination paging-element">
+                    <c:if test="${currentPage != 0}">
+                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/?page=${currentPage - 1}"><spring:message code="page.prev" text="Previous" /></a></li>
+                    </c:if>
+
+                    <c:forEach begin="0" end="${noOfPages}" var="i">
+                        <c:choose>
+                            <c:when test="${currentPage eq i}">
+                                <li class="page-item active"><a class="page-link">
+                                        ${i + 1} <span class="sr-only">(current)</span></a>
+                                </li>
+                            </c:when>
+                            <c:otherwise>
+                                <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/?page=${i}">${i + 1}</a></li>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:forEach>
+
+                    <c:if test="${currentPage lt noOfPages}">
+                        <li class="page-item"><a class="page-link" href="${pageContext.request.contextPath}/?page=${currentPage+1}"><spring:message code="page.next" text="Next" /></a>
+                        </li>
+                    </c:if>
+                </ul>
             </div>
             </c:otherwise>
         </c:choose>
