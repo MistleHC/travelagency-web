@@ -24,7 +24,6 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.gmail.mistle.ibo.travelagency")
-@PropertySource({"classpath:validation_en_US.properties"})
 @AllArgsConstructor
 public class WebConfig implements WebMvcConfigurer {
     private final ApplicationContext applicationContext;

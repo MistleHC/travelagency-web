@@ -19,7 +19,6 @@ import com.gmail.mistle.ibo.travelagency.config.constants.UserRoles;
 
 @Configuration
 @EnableWebSecurity
-@PropertySource({"classpath:security.properties"})
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService customUserDetailsService;
@@ -43,8 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/resources/**", "/register", "errors/**", "/", "/page/**","/login")
                     .permitAll()
-                .antMatchers("/hotels/**", "/rooms/**", "/management/**").hasRole(UserRoles.MANAGER.toString())
-                .antMatchers("/admin/**").hasIpAddress(env.getRequiredProperty("user.ip_address"))
+                .antMatchers("/management/**").hasRole(UserRoles.MANAGER.toString())
                 .anyRequest()
                     .authenticated()
                 .and()
