@@ -208,7 +208,7 @@
                                 <div class="modal-content">
                                     <!-- Modal Header -->
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Create new tour</h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Set discount</h4> <button type="button" class="close cl-btn" data-dismiss="modal">&times;</button>
                                     </div> <!-- Modal body -->
                                     <div class="modal-body">
                                         <div>

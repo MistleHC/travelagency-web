@@ -20,23 +20,39 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private final UserDAO userDAO;
 
+    /**
+     * @return list of all users
+     */
     @Override
     public List<User> getAll() {
         return userDAO.findAll();
     }
 
+    /**
+     * @param id target users ID
+     * @return target user object
+     */
     @Override
     public User getById(Long id) {
         return userDAO.findUserById(id)
                       .orElseThrow(NotFoundException::new);
     }
 
+    /**
+     * @param email target users email
+     * @return target user object
+     */
     @Override
     public User getByEmail(String email) {
         return userDAO.findUserByEmail(email)
                       .orElseThrow(NotFoundException::new);
     }
 
+    /**
+     * @param id users ID
+     * @see UserInfoDto
+     * @return Users information object that do not contain users password
+     */
     @Override
     public UserInfoDto getUserInfo(Long id) {
         User user = getById(id);
@@ -51,11 +67,20 @@ public class UserServiceImpl implements UserService {
                 .build();
     }
 
+    /**
+     * @param user Save user object
+     */
     @Override
     public void save(User user) {
         userDAO.save(user);
     }
 
+    /**
+     * Update user details information
+     * @param userProfileDto user details information
+     * @param userId targed users ID
+     * @return updated user object
+     */
     @Override
     @Transactional
     public User updateUserInfo(UserProfileDto userProfileDto, Long userId) {

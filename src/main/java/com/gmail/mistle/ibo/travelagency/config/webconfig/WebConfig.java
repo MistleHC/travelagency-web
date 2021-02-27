@@ -54,12 +54,18 @@ public class WebConfig implements WebMvcConfigurer {
         setImageResourceHandling(registry);
     }
 
+    /**
+     * Set-up static resource directory
+     */
     private void setStaticResourceHandling(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**")
                 .addResourceLocations("/resources/")
                 .setCacheControl(CacheControl.maxAge(2, TimeUnit.HOURS).cachePublic());
     }
 
+    /**
+     * Set-up image content directory
+     */
     private void setImageResourceHandling(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
                 .addResourceLocations("/WEB-INF/images/")
@@ -76,6 +82,9 @@ public class WebConfig implements WebMvcConfigurer {
         return messageSource;
     }
 
+    /**
+     * Set-up localization resolver
+     */
     @Bean
     public LocaleResolver localeResolver() {
         SessionLocaleResolver slr = new SessionLocaleResolver();

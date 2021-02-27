@@ -16,6 +16,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class StatusServiceImpl implements StatusService {
     private final StatusDAO statusDAO;
 
+    /**
+     * Find status using its ID
+     * @param id target status id
+     * @return status object
+     * @see Status
+     */
     @Override
     public Status findById(Long id) {
         return statusDAO

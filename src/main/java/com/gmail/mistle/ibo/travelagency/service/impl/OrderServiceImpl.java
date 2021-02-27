@@ -26,6 +26,12 @@ public class OrderServiceImpl implements OrderService {
     private final StatusService statusService;
     private final OrderDAO orderDAO;
 
+    /**
+     * Create order for specific tour
+     * @param tourId id of the tour related to current order
+     * @see com.gmail.mistle.ibo.travelagency.model.Tour
+     * @see Order
+     */
     @Override
     @Transactional
     public void createOrder(long tourId) {
@@ -38,12 +44,19 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.saveAndFlush(order);
     }
 
+    /**
+     * @param orderId Delete order using its ID
+     */
     @Override
     @Transactional
     public void deleteOrder(long orderId) {
         orderDAO.deleteById(orderId);
     }
 
+    /**
+     * Set status of target order as 'Paid'
+     * @param orderId target order ID
+     */
     @Override
     @Transactional
     public void setPaid(long orderId) {
@@ -52,6 +65,10 @@ public class OrderServiceImpl implements OrderService {
        orderDAO.save(order);
     }
 
+    /**
+     * Set status of target order as 'Declined'
+     * @param orderId target order ID
+     */
     @Override
     @Transactional
     public void setDecline(long orderId) {
@@ -60,16 +77,28 @@ public class OrderServiceImpl implements OrderService {
         orderDAO.save(order);
     }
 
+    /**
+     * @param userId target user ID
+     * @return list of users orders
+     * @see Order
+     */
     @Override
     public List<Order> getAllByUserId(Long userId) {
         return orderDAO.findAllByCustomer_Id(userId);
     }
 
+    /**
+     * @return list of orders with status 'Pending'
+     */
     @Override
     public List<Order> getNewOrders() {
         return orderDAO.findAllByStatus_Title("Pending");
     }
 
+
+    /**
+     * @return active users ID
+     */
     private Long getIdOfCurrentLoggedInUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         CustomUserDetails userDetails = (CustomUserDetails) principal;

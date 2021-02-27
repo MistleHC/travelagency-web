@@ -19,12 +19,21 @@ import java.util.stream.StreamSupport;
 public class CountryServiceImpl implements CountryService {
     private final CountryDAO countryDAO;
 
+    /**
+     * @return list of Country objects
+     * @see Country
+     */
     @Override
     public List<Country> getAll() {
         return StreamSupport.stream(countryDAO.findAll().spliterator(), false)
                                               .collect(Collectors.toList());
     }
 
+    /**
+     * @param countryName target country name
+     * @return existence of target country
+     * @see Country
+     */
     @Override
     public boolean existsByName(String countryName) {
         return countryDAO.findByName(countryName).isPresent();

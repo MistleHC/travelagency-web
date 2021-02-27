@@ -20,7 +20,7 @@
 
             <div class="mb-3">
                 <label for="userName" class="form-label"><spring:message code="reg.name" /></label>
-                <form:input path="name" type="text" class="form-control" id="userName" placeholder="Enter name"/>
+                <form:input path="name" type="text" class="form-control" id="userName" required="required" placeholder="Enter name"/>
                 <div class="invalid-feedback d-block">
                     <form:errors path="name" />
                 </div>
@@ -28,7 +28,7 @@
 
             <div class="mb-3">
                 <label for="userEmail" class="form-label"><spring:message code="login.email" text="Email address" /></label>
-                <form:input path="email" type="email" class="form-control" id="userEmail" placeholder="name@example.com"/>
+                <form:input path="email" type="email" class="form-control" id="userEmail" required="required" placeholder="name@example.com"/>
                 <div class="invalid-feedback d-block">
                     <form:errors path="email" />
                 </div>
@@ -36,7 +36,7 @@
 
             <div class="mb-3">
                 <label for="userPassword" class="form-label"><spring:message code="login.password" text="Password" /></label>
-                <form:input path="password" type="password" class="form-control" id="userPassword" placeholder="Your password" />
+                <form:input path="password" type="password" class="form-control" id="userPassword" required="required" placeholder="Your password" />
                 <div class="invalid-feedback d-block">
                     <form:errors path="password" />
                 </div>

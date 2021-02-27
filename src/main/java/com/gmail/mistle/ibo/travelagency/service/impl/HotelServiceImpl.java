@@ -17,6 +17,10 @@ import java.util.stream.StreamSupport;
 public class HotelServiceImpl implements HotelService {
     private final HotelDAO hotelDAO;
 
+    /**
+     * @return list of HotelType objects
+     * @see HotelType
+     */
     @Override
     public List<HotelType> getAll() {
         return StreamSupport.stream(hotelDAO.findAll().spliterator(), false)

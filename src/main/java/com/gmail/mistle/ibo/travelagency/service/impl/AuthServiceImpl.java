@@ -25,6 +25,11 @@ public class AuthServiceImpl implements AuthService {
     private final BCryptPasswordEncoder passwordEncoder;
     private final RoleService roleService;
 
+    /**
+     * @param userToRegister user object that should be registered
+     * @see User
+     * @see Role 'CUSTOMER' role should be asigned for new user
+     */
     @Override
     public void registerUser(User userToRegister) {
         encodeUsersPassword(userToRegister);
@@ -33,36 +38,20 @@ public class AuthServiceImpl implements AuthService {
         userService.save(userToRegister);
     }
 
-    @Override
-    public void toggleRoleOfUser(UserRoles role, User user) {
-        if (userHasRole(user, role)) {
-            detachRoleToUser(role, user);
-        } else {
-            attachRoleToUser(role, user);
-        }
-        userService.save(user);
-    }
-
-    private boolean userHasRole(User user, UserRoles roleToCheck) {
-        return user.getRoles()
-                .stream()
-                .anyMatch(role -> role.getName().equals(roleToCheck.toString()));
-    }
-
+    /**
+     * @param user encode user password
+     */
     private void encodeUsersPassword(User user) {
         String encodedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
     }
 
-    private void detachRoleToUser(UserRoles roleToDetach, User user) {
-        Set<Role> currentRoles = user.getRoles();
-        Set<Role> filteredRoles = currentRoles
-                                        .stream()
-                                        .filter(role -> !role.getName().equals(roleToDetach.toString()))
-                                        .collect(Collectors.toSet());
-        user.setRoles(filteredRoles);
-    }
-
+    /**
+     * Grant privileges for specific user
+     * @param role granted role
+     * @param user target user
+     * @see Role
+     */
     private void attachRoleToUser(UserRoles role, User user) {
         Set<Role> roles = user.getRoles();
         Role desiredRole = roleService.getByName(role.toString());

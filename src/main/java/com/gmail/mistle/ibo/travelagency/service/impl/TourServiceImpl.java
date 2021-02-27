@@ -22,6 +22,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+/**
+ * Tour interaction interface
+ */
 @Service
 @AllArgsConstructor
 @Slf4j
@@ -31,18 +34,29 @@ public class TourServiceImpl implements TourService {
     private final TourTypeDAO tourTypeDAO;
     private final HotelDAO hotelDAO;
 
+    /**
+     * @return List of tour objects
+     */
     @Override
     public List<Tour> getAll() {
         return StreamSupport.stream(tourDAO.findAll().spliterator(), false)
                                            .collect(Collectors.toList());
     }
 
+    /**
+     * @param tourId - target id
+     * @return Tour object
+     */
     @Override
     public Tour getById(long tourId) {
         return tourDAO.findById(tourId)
                       .orElseThrow(NotFoundException::new);
     }
 
+    /**
+     * @param filter contains filtering parameters
+     * @return list of filtered tours
+     */
     @Override
     public List<Tour> getAllByFilter(TourFilterDto filter) {
         List<Tour> tours;
@@ -60,27 +74,46 @@ public class TourServiceImpl implements TourService {
         return filterTours(tours, filter);
     }
 
+    /**
+     * @return the list of tour types entities
+     * @see TourType
+     */
     @Override
     public List<TourType> getTourTypes() {
         return StreamSupport.stream(tourTypeDAO.findAll().spliterator(), false)
                                                .collect(Collectors.toList());
     }
 
+    /**
+     * @param tourId target id
+     * Mark target object's field is_hot as true
+     */
     @Override
     public void setHot(Long tourId) {
         tourDAO.setHot(tourId, true);
     }
 
+    /**
+     * @param tourId targed id
+     * Mark target object's field is_hot as false
+     */
     @Override
     public void setNotHot(Long tourId) {
         tourDAO.setHot(tourId, false);
     }
 
+    /**
+     * @param tourId Delete target object using ID
+     */
     @Override
     public void deleteById(Long tourId) {
         tourDAO.deleteById(tourId);
     }
 
+    /**
+     * @param tourId ID of target object
+     * @param discount Discount value that ranges [1 - 20]
+     */
     @Override
     public void setDiscount(Long tourId, Long discount) {
         Tour tour = tourDAO.findById(tourId).orElseThrow(NotFoundException::new);
@@ -88,6 +121,11 @@ public class TourServiceImpl implements TourService {
         tourDAO.save(tour);
     }
 
+    /**
+     * Creating new tour
+     * @param tourCreationDto Data transfer object that contains initial tour data
+     * @return created Tour object
+     */
     @Override
     @Transactional
     public Tour saveNewTour(TourCreationDto tourCreationDto) {
@@ -112,6 +150,12 @@ public class TourServiceImpl implements TourService {
         return tourDAO.save(tour);
     }
 
+
+    /**
+     * @param list List of the Tour objects
+     * @param filter filtering parameters
+     * @return sorted list of Tour objects
+     */
     private List<Tour> filterTours(List<Tour> list, TourFilterDto filter) {
         List<Tour> tours = list;
         if (!filter.getLowerPrice().equals("")) {
