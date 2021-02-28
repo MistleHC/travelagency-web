@@ -185,7 +185,7 @@
                                             <input type="hidden" name="tourid" value="${tour.id}" />
                                             <button class="btn btn-lg btn-warning search-btn" type="submit"><spring:message code="item.nothot" text="Set as not hot!" /></button>
                                         </form>
-                                        <sec:authorize access="hasAnyRole('ADMIN')">
+                                        <sec:authorize access="hasAnyRole('MANAGER', 'ADMIN')">
                                             <a href="#" data-toggle="modal" data-dismiss="modal" data-target="#modaldiscount${tour.id}" class="btn btn-lg btn-outline btn-primary"><spring:message code="disc.set" text="Set discount" /><i class="fa fa-long-arrow-right"></i> </a>
                                         </sec:authorize>
                                     </sec:authorize>
